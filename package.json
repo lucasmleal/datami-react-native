@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://Pawan0504@bitbucket.org/personal_testing/reactnative-smisdk-plugin.git"
+    "url": "https://bitbucket.org/datami/sd-react-native-smisdk-plugin.git"
   },
   "dependencies": {
     "react": "16.4.1",
@@ -16,5 +16,5 @@
   },
   "author": "Datami inc",
   "license": "Datami mobile solutions",
-  "homepage": "https://Pawan0504@bitbucket.org/personal_testing/reactnative-smisdk-plugin"
+  "homepage": "https://bitbucket.org/datami/sd-react-native-smisdk-plugin"
 }
