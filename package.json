@@ -1,0 +1,20 @@
+{
+  "name": "react-native-smisdk-plugin",
+  "version": "1.0.0",
+  "description": "Datami React native plugin",
+  "private": true,
+  "scripts": {
+    "postinstall": "node smisdk_integration.js start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://Pawan0504@bitbucket.org/personal_testing/reactnative-smisdk-plugin.git"
+  },
+  "dependencies": {
+    "react": "16.4.1",
+    "react-native": "0.56.0"
+  },
+  "author": "Datami inc",
+  "license": "Datami mobile solutions",
+  "homepage": "https://Pawan0504@bitbucket.org/personal_testing/reactnative-smisdk-plugin"
+}
