@@ -102,8 +102,10 @@ public class SmiSdkReactModule extends ReactContextBaseJavaModule {
         sSmiResult = result;
         // Get EventEmitter from context and send event to it
         if(mReactContext!=null){
-            mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                    .emit("onSdStateChange", getMappings());
+            if (mReactContext.hasActiveCatalystInstance()){
+                mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                        .emit("onSdStateChange", getMappings());
+            }
         }
     }
 
@@ -112,8 +114,10 @@ public class SmiSdkReactModule extends ReactContextBaseJavaModule {
         // Get EventEmitter from context and send event to it
         Log.d(TAG, "registerSdStateChangeListner.");
         if(mReactContext!=null){
-            mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                    .emit("onSdStateChange", getMappings());
+            if (mReactContext.hasActiveCatalystInstance()){
+                mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                        .emit("onSdStateChange", getMappings());
+            }
         }
     }
 
