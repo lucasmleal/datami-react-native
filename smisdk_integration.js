@@ -43,28 +43,9 @@ function getApplicationClassName(folder) {
   return packages.length ? packages[0][1] : null;
 };
 
-// Append a child element
-function appendChild(xmlDoc, parentElement, name, text) {
-  let childElement = xmlDoc.createElement(name);
-  if (typeof text !== 'undefined') {
-    let textNode = xmlDoc.createTextNode(text);
-    childElement.appendChild(textNode);
-  }
-  parentElement.appendChild(childElement);
-  return childElement;
-}
-
 // String append
 function insert(str, index, value) {
     return str.substr(0, index) + value + str.substr(index);
-}
-
-// Copy file from source to destination
-function fileCopy(srcFile, destFile, encoding) {
-  console.log('file copy()');
-
-  var content = fs.readFileSync(srcFile, encoding);
-  fs.writeFileSync(destFile, content, encoding);
 }
 
 // update manifest file with app name
@@ -172,7 +153,7 @@ function projectConfigAndroid(folder) {
 		 	
 		 	const packageImport = 'import com.datami.smi.SdStateChangeListener; \nimport com.datami.smi.SmiResult; \nimport com.datami.smi.SmiSdk; \nimport com.datami.smisdk_plugin.SmiSdkReactModule; \nimport com.datami.smisdk_plugin.SmiSdkReactPackage; \n';
 		 	
-		 	const initSponsoredDataAPI = '\nSmiSdk.initSponsoredData(getResources().getString(R.string.smisdk_apikey), \nthis, \ngetResources().getString(R.string.user_id),R.mipmap.ic_launcher,\ngetResources().getBoolean(R.bool.show_messaging),\nArrays.asList(getResources().getStringArray(R.array.exclusion_domin)),\nArrays.asList(getResources().getStringArray(R.array.user_tag)));';
+		 	const initSponsoredDataAPI = '\nSmiSdk.initSponsoredData(getResources().getString(R.string.smisdk_apikey), \nthis, \ngetResources().getString(R.string.smisdk_user_id),R.mipmap.ic_launcher,\ngetResources().getBoolean(R.bool.smisdk_show_messaging),\nArrays.asList(getResources().getStringArray(R.array.smisdk_exclusion_domin)),\nArrays.asList(getResources().getStringArray(R.array.smisdk_user_tag)));';
 		 	
 		 	const onCreateMethod = '\n @Override \n public void onCreate() { \n  super.onCreate();'+ initSponsoredDataAPI + ' \n}'; 	
 		 	
@@ -224,7 +205,7 @@ function projectConfigAndroid(folder) {
  		}
   	}
   	else{
-  		console.log('error in getting applicationClassName.');
+  		console.log('Error in getting applicationClassName.');
   	}
   }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
