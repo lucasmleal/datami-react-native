@@ -43,12 +43,13 @@ public class SmiSdkReactModule extends ReactContextBaseJavaModule {
             SmiResult result = SmiSdk.getSDAuth(sdkKey, mContext, url, userId);
             if(smiResultCB!=null){
                 Log.d(TAG, "smiResultCB not null");
-                String state = "sd_state: " + result.getSdState().name();
-                String reason = "sd_reason: " + result.getSdReason().name();
-                String carrier = "carrier_name: " + result.getCarrierName();
-                String clientIp = "client_ip: " + result.getClientIp();
-                String sdUrl = "url: " + result.getUrl();
-                smiResultCB.invoke(state, reason, carrier, clientIp, sdUrl);
+                WritableMap payload = Arguments.createMap();
+                payload.putString("sd_state", result.getSdState().name());
+                payload.putString("sd_reason", result.getSdReason().name());
+                payload.putString("carrier_name", result.getCarrierName());
+                payload.putString("client_ip", result.getClientIp());
+                payload.putString("url", result.getUrl());
+                smiResultCB.invoke(payload);
             }
         } catch (Exception e) {
             Log.e(TAG, "Exception: ", e);
@@ -64,10 +65,11 @@ public class SmiSdkReactModule extends ReactContextBaseJavaModule {
         }
         Analytics smiAnalytics = SmiSdk.getAnalytics();
         if(smiAnalyticsCB!=null){
-            String cst = "cellular_session_time: " + smiAnalytics.getCellularSessionTime();
-            String dataUsage = "sd_data_usage: " + smiAnalytics.getSdDataUsage();
-            String wst = "wifi_session_time: " + smiAnalytics.getWifiSessionTime();
-            smiAnalyticsCB.invoke(cst, dataUsage, wst);
+            WritableMap payload = Arguments.createMap();
+            payload.putDouble("cellular_session_time", smiAnalytics.getCellularSessionTime());
+            payload.putDouble("sd_data_usage", smiAnalytics.getSdDataUsage());
+            payload.putDouble("wifi_session_time", smiAnalytics.getWifiSessionTime());
+            smiAnalyticsCB.invoke(payload);
         }
     }
 
