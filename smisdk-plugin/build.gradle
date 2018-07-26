@@ -1,28 +1,18 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 17
-        targetSdkVersion 27
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    //noinspection GradleCompatible
     compile 'com.facebook.react:react-native:+'
     compile 'com.datami:smisdk:+'
 }
