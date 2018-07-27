@@ -44,11 +44,9 @@ public class MainApplication extends Application implements SdStateChangeListene
   public void onCreate() { 
    super.onCreate();
    SmiSdk.initSponsoredData(getResources().getString(R.string.smisdk_apikey), 
-   this, 
-   getResources().getString(R.string.smisdk_user_id),R.mipmap.ic_launcher,
+   this, null,R.mipmap.ic_launcher,
    getResources().getBoolean(R.bool.smisdk_show_messaging),
-   Arrays.asList(getResources().getStringArray(R.array.smisdk_exclusion_domin)),
-   Arrays.asList(getResources().getStringArray(R.array.smisdk_user_tag)));
+   Arrays.asList(getResources().getStringArray(R.array.smisdk_exclusion_domin)));
  }
 
 @Override 
