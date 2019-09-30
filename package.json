@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://bitbucket.org/datami/sd-react-native-smisdk-plugin.git"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "16.4.1",
     "react-native": "0.56.0"
   },
