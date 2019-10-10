@@ -178,6 +178,7 @@
      		   console.log('applicationClassName after:' + applicationClassName);
 
      		   const manifest = readManifest(manifestPath);
+           console.log("manifest ===> ",manifest);
    		   const packageName = getPackageName(manifest);
    		    console.log('packageName: ' + packageName);
    		   const packageFolder = packageName.replace(/\./g, path.sep);
