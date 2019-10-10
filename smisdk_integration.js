@@ -8,6 +8,7 @@
    function findAndroidAppFolder(folder) {
       const flat = 'android';
       const nested = path.join('android', 'app');
+      console.log(nested);
       if (fs.existsSync(path.join(folder, nested))) {
          return nested;
      }
@@ -120,6 +121,7 @@
    //// Main function to perform integration
    function projectConfigAndroid(folder) {
       const androidAppFolder = findAndroidAppFolder(folder);
+      console.log('Folder : '+folder+" app folder : "+androidAppFolder);
 
       if (!androidAppFolder) {
      	   console.log('App folder not available.');
@@ -146,6 +148,7 @@
 
       	const manifest = readManifest(manifestPath);
       	const packageName = getPackageName(manifest);
+        console.log("Package Name ===> ",packageName);
       	const packageNameStr = "package " + packageName + ';\n';
       	const packageFolder = packageName.replace(/\./g, path.sep);
       	const appPackagePath = path.join(sourceDir,`src/main/java/${packageFolder}`);
@@ -176,9 +179,9 @@
 
      		   const manifest = readManifest(manifestPath);
    		   const packageName = getPackageName(manifest);
-   		   // console.log('packageName: ' + packageName);
+   		    console.log('packageName: ' + packageName);
    		   const packageFolder = packageName.replace(/\./g, path.sep);
-   		    // console.log('packageFolder: ' + packageFolder);
+   		     console.log('packageFolder: ' + packageFolder);
      		   const mainApplicationPath = path.join(sourceDir, 
      			`src/main/java/${packageFolder}/${applicationClassName}.java`);
      	      console.log('mainApplicationPath: ' + mainApplicationPath);
