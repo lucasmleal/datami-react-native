@@ -53,7 +53,7 @@
       console.log('findStringsXml()');
       const stringsXmlPath = glob.sync(path.join('**', 'strings.xml'), {
        cwd: folder,
-       ignore: ['node_modules/**', '**/build/**', 'Examples/**', 'examples/**'],
+       ignore: ['node_modules/**', '**/build/**', 'Examples/**', 'examples/**','**/debug/**'],
       })[0];
 
       return stringsXmlPath ? path.join(folder, stringsXmlPath) : null;
