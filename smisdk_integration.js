@@ -20,7 +20,7 @@
    function findManifest(folder) {
       const manifestPath = glob.sync(path.join('**', 'AndroidManifest.xml'), {
        cwd: folder,
-       ignore: ['node_modules/**', '**/build/**', 'Examples/**', 'examples/**'],
+       ignore: ['node_modules/**', '**/build/**', 'Examples/**', 'examples/**','**/debug/**'],
       })[0];
 
       return manifestPath ? path.join(folder, manifestPath) : null;
@@ -52,7 +52,7 @@
       console.log('findStringsXml()');
       const stringsXmlPath = glob.sync(path.join('**', 'strings.xml'), {
        cwd: folder,
-       ignore: ['node_modules/**', '**/build/**', 'Examples/**', 'examples/**'],
+       ignore: ['node_modules/**', '**/build/**', 'Examples/**', 'examples/**','**/debug/**'],
       })[0];
 
       return stringsXmlPath ? path.join(folder, stringsXmlPath) : null;
