@@ -47,19 +47,11 @@ grep -lr "defaultSessionConfiguration" $CUR_DIR --include=*.m  --include=*.mm | 
 				NSURLSessionConfiguration *aConfig = [NSURLSessionConfiguration defaultSessionConfiguration];\
 			' $line;
 
-			if [[ $line = *"react-native/React"* ]]; then
-				echo '#import "SmiSdk.h"' > temp.txt
-				cat $line >> temp.txt
-				rm $line
-				mv temp.txt $line
-			 	#echo '#import "SmiSdk.h"' | cat - $line | tee $line >> /dev/null
-			 else
-			 	echo '#import <React/SmiSdk.h>' > temp.txt
-				cat $line >> temp.txt
-				rm $line
-				mv temp.txt $line
-			 	# echo '#import <React/SmiSdk.h>' | cat - $line | tee $line >> /dev/null
-			fi
+			echo '#import "SmiSdk.h"' > temp.txt
+			cat $line >> temp.txt
+			rm $line
+			mv temp.txt $line
+			#echo '#import "SmiSdk.h"' | cat - $line | tee $line >> /dev/null
 		fi
 	fi
 

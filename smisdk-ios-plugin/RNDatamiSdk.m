@@ -13,8 +13,9 @@ RCT_EXPORT_METHOD(getSDURL:(NSString *)url:(RCTResponseSenderBlock)callback) {
     NSString* apiKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"DATAMI_API_KEY"];
     if([apiKey length]) {
         SmiResult *sr = [SmiSdk getSDAuth:apiKey url:url userId:nil];
-        NSLog(@"sr.url:%@ sr.state:%ld",sr.url,(long)sr.sdState);
-        callback(@[sr.url, [NSNumber numberWithInt:sr.sdState], [NSNumber numberWithInt:sr.sdReason]]);
+        NSLog(@"sr.url:%@ sr.state:%ld sr.clientIp:%@ sr.carrierName:%@ ",sr.url,(long)sr.sdState, sr.clientIp, sr.carrierName);
+        callback(@[sr.url, [NSNumber numberWithInt:sr.sdState], [NSNumber numberWithInt:sr.sdReason],
+         sr.clientIp, sr.carrierName, sr.sdHost, [NSNumber numberWithInt:sr.sdPort], sr.userName, sr.password]);
     }
     else{
         callback(@[[NSNull null], [NSNull null], [NSNull null]]);
