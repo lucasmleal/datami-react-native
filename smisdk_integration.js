@@ -190,7 +190,7 @@
    	      if(isPackageExist<0){
    		 	  const smiPackageName = ', new SmiSdkReactPackage()';
    		 	
-   		     const packageImport = 'import com.datami.smi.SdStateChangeListener; \nimport com.datami.smi.SmiResult; \nimport com.datami.smi.SmiVpnSdk; \nimport com.datami.smisdk_plugin.SmiSdkReactModule; \nimport com.datami.smisdk_plugin.SmiSdkReactPackage; \n';
+   		     const packageImport = 'import com.datami.smi.SdStateChangeListener; \nimport com.datami.smi.SmiResult; \nimport com.datami.smi.SmiVpnSdk; \nimport com.datami.smi.SmiSdk; \nimport com.datami.smisdk_plugin.SmiSdkReactModule; \nimport com.datami.smisdk_plugin.SmiSdkReactPackage; \n';
    		 	
    		 	  const initSponsoredDataAPI = '\nSmiVpnSdk.initSponsoredData(getResources().getString(R.string.smisdk_apikey), \nthis, R.mipmap.ic_launcher,\ngetResources().getBoolean(R.bool.smisdk_show_messaging));';
    		 	
