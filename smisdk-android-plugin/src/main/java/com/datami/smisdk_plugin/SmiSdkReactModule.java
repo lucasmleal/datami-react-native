@@ -6,6 +6,8 @@ import android.util.Log;
 import com.datami.smi.Analytics;
 import com.datami.smi.SmiResult;
 import com.datami.smi.SmiSdk;
+import com.datami.smi.SmiVpnSdk;
+import com.datami.smi.internal.MessagingType;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -34,6 +36,34 @@ public class SmiSdkReactModule extends ReactContextBaseJavaModule {
     @Override
     public String getName() {
         return "SmiSdkReactModule";
+    }
+
+    @ReactMethod
+    public SdState getCurrentSdState(){
+        Log.d(TAG, "getCurrentSdState()");
+        
+        return SmiVpnSdk.getCurrentSdState();
+    }
+
+    @ReactMethod
+    public void startSponsoredData(){
+        Log.d(TAG, "startSponsoredData()");
+        
+        SmiVpnSdk.startSponsoredData();
+    }
+
+    @ReactMethod
+    public void stopSponsoredData(){
+        Log.d(TAG, "stopSponsoredData()");
+        
+        SmiVpnSdk.stopSponsoredData();
+    }
+
+    @ReactMethod
+    public void initSponsoredData(String sdkKey, int iconId, MessagingType messagingType, boolean startVpn){
+        Log.d(TAG, "initSponsoredData()");
+        
+        SmiVpnSdk.initSponsoredData(sdkKey, mContext, iconId, messagingType, startVpn);
     }
 
     @ReactMethod
