@@ -63,19 +63,11 @@
    function updateConfigurationFile(confFilePath){
       console.log('updateConfigurationFile()');
       const smisdkApikey = '\n<string name="smisdk_apikey"></string>';
-      const smisdkShowMessaging = '\n<bool name="smisdk_show_messaging">true</bool>';
-      const smisdkExclusionDomin = '\n<array name="smisdk_exclusion_domin"></array>';
      
       var stringsXmlDoc= fs.readFileSync(confFilePath, 'utf8');
       var resourcesEndIndex = stringsXmlDoc.search("</resources>")
       if(stringsXmlDoc.search('smisdk_apikey')<0){
          stringsXmlDoc = insert(stringsXmlDoc, resourcesEndIndex-1, smisdkApikey);
-      }
-      if(stringsXmlDoc.search('smisdk_show_messaging')<0){
-         stringsXmlDoc = insert(stringsXmlDoc, resourcesEndIndex-1, smisdkShowMessaging);
-      }
-         if(stringsXmlDoc.search('smisdk_exclusion_domin')<0){
-         stringsXmlDoc = insert(stringsXmlDoc, resourcesEndIndex-1, smisdkExclusionDomin);
       }
       fs.writeFileSync(confFilePath, stringsXmlDoc, 'utf8');
    }
@@ -113,8 +105,105 @@
        		attrApplication[0].setAttribute('android:name ', '.' +applicationClassName);
        		fs.writeFileSync(manifestPath, manifestXmlDoc, 'utf8');
        	}
+
    	}
    }
+
+//Implementtion to add network security config.
+ function updateNetworkConfig(filePath){
+    // const filePath = "res/xml/network_security_config.xml";
+    console.log("network_security_config.xml path : "+filePath);
+
+    if(checkNetworkConfigExist(filePath)){
+      var xmlDoc = new DOMParser().parseFromString(fs.readFileSync(filePath, "utf-8"), "text/xml");
+      checkClearTextValue(xmlDoc, filePath);
+
+      if(checkDatamiDomain(xmlDoc)){
+        console.log("Datami Domain already available !!");
+      }else{
+        addDatamiDoamin(xmlDoc, filePath);
+      }
+    }else{
+      createNewNetworkConfig(filePath);
+    }
+
+ }
+
+ function addDatamiDoamin(xmlDoc, filePath){
+    newElement = xmlDoc.createElement('domain');
+    textElement = xmlDoc.createTextNode('cloudmi.datami.com');
+    newElement.setAttribute("includeSubdomains", "true");
+    newElement.appendChild(textElement);
+    nodeNetworkConfig = xmlDoc.getElementsByTagName('domain-config')[0];
+    nodeNetworkConfig.appendChild(newElement);
+
+    console.log('nodeNetworkConfig: ' + nodeNetworkConfig.length);
+
+      fs.writeFileSync(filePath, xmlDoc, 'utf8');
+
+ }
+
+ function checkDatamiDomain(xmlDoc){
+  available = false;
+
+  nodeNetworkConfig = xmlDoc.getElementsByTagName('domain');
+  console.log('nodeNetworkConfig: ' + nodeNetworkConfig.length);
+
+  for(var i =0; i<nodeNetworkConfig.length; i++){
+    if(nodeNetworkConfig[i].nodeType ==1){
+      var domainName = nodeNetworkConfig[i].childNodes[0].nodeValue;
+      console.log("Name : "+domainName);
+      if(null != domainName && domainName.localeCompare('cloudmi.datami.com') == 0){
+        available = true;
+        break;
+      }
+    }
+  }
+
+  return available;
+ }
+
+ function checkNetworkConfigExist(filePath){
+    return fs.existsSync(filePath, fs.constants.F_OK);
+ }
+
+ function createNewNetworkConfig(filePath){
+   var xmlString = `<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">cloudmi.datami.com</domain>
+    </domain-config>
+</network-security-config>`;
+
+    var xmlFile = fs.appendFileSync(filePath, xmlString, "utf-8");
+     
+      console.log("File created ...");
+
+ }
+
+ function checkClearTextValue(xmlDoc, filePath){
+    configChanged = false;
+
+    element = xmlDoc.getElementsByTagName('domain-config')[0];
+    attribute = element.getAttributeNode("cleartextTrafficPermitted");
+    if(null == attribute){
+      console.log("Clear Text Value not available so creating NEW ");
+      element.setAttribute("cleartextTrafficPermitted", "true");
+      configChanged = true;
+    }else{
+      if(true == attribute.nodeValue){
+        console.log("Clear Text Value alreaady set."+attribute.nodeValue);
+      }else{
+        configChanged = true;
+        element.setAttribute("cleartextTrafficPermitted", "true");
+        console.log("Clear Text Value set to true.");
+      }
+    }
+
+    if(configChanged){
+        fs.writeFileSync(filePath, xmlDoc, 'utf8');
+    }
+ }
 
 
    //// Main function to perform integration
@@ -128,6 +217,9 @@
 
       const sourceDir = path.join(folder, androidAppFolder);
       console.log('sourceDir: ' + sourceDir);
+
+      //update network security config
+      updateNetworkConfig(sourceDir+'/src/main/res/xml/network_security_config.xml');
 
       const manifestPath = findManifest(sourceDir);
       console.log('manifestPath: ' + manifestPath);
@@ -190,7 +282,7 @@
    	      if(isPackageExist<0){
    		 	  const smiPackageName = ', new SmiSdkReactPackage()';
    		 	
-   		     const packageImport = 'import com.datami.smi.SdStateChangeListener; \nimport com.datami.smi.SmiResult; \nimport com.datami.smi.SmiVpnSdk; \nimport com.datami.smi.SmiSdk; \nimport com.datami.smisdk_plugin.SmiSdkReactModule; \nimport com.datami.smisdk_plugin.SmiSdkReactPackage; \nimport com.datami.smi.internal.MessagingType; \n';
+   		    const packageImport = 'import com.datami.smi.SdStateChangeListener; \nimport com.datami.smi.SmiResult; \nimport com.datami.smi.SmiVpnSdk; \nimport com.datami.smi.SmiSdk; \nimport com.datami.smisdk_plugin.SmiSdkReactModule; \nimport com.datami.smisdk_plugin.SmiSdkReactPackage; \nimport com.datami.smi.internal.MessagingType; \n';
    		 	
    		 	  const initSponsoredDataAPI = '\nSmiVpnSdk.initSponsoredData(getResources().getString(R.string.smisdk_apikey), \nthis, R.mipmap.ic_launcher,\nMessagingType.BOTH, true);';
    		 	
