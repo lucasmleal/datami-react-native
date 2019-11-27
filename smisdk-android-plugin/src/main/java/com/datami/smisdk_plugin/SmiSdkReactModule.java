@@ -7,6 +7,7 @@ import com.datami.smi.Analytics;
 import com.datami.smi.SmiResult;
 import com.datami.smi.SmiSdk;
 import com.datami.smi.SmiVpnSdk;
+import com.datami.smi.SdState;
 import com.datami.smi.internal.MessagingType;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
