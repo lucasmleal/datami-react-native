@@ -219,7 +219,7 @@
       console.log('sourceDir: ' + sourceDir);
 
       //update network security config
-      updateNetworkConfig(sourceDir+'/src/main/res/xml/network_security_config.xml');
+      // updateNetworkConfig(sourceDir+'/src/main/res/xml/network_security_config.xml');
 
       const manifestPath = findManifest(sourceDir);
       console.log('manifestPath: ' + manifestPath);
