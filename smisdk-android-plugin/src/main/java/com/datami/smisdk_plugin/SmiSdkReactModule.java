@@ -40,10 +40,14 @@ public class SmiSdkReactModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public SdState getCurrentSdState(){
+    public void getCurrentSdState(Callback stateCB){
         Log.d(TAG, "getCurrentSdState()");
-        
-        return SmiVpnSdk.getCurrentSdState();
+        SdState st = SmiVpnSdk.getCurrentSdState();
+        if(stateCB!=null){
+            WritableMap payload = Arguments.createMap();
+            payload.putString("sd_state", st.toString());
+            stateCB.invoke(payload);
+        }        
     }
 
     @ReactMethod
