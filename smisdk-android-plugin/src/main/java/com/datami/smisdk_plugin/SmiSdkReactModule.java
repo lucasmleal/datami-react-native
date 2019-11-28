@@ -71,69 +71,6 @@ public class SmiSdkReactModule extends ReactContextBaseJavaModule {
         SmiVpnSdk.initSponsoredData(sdkKey, mContext, iconId, messagingType, startVpn);
     }
 
-    @ReactMethod
-    public void getSDAuth(String sdkKey, String url, String userId, Callback smiResultCB){
-        Log.d(TAG, "getSDAuth()");
-        try {
-            SmiResult result = SmiSdk.getSDAuth(sdkKey, mContext, url, userId);
-            if(smiResultCB!=null){
-                Log.d(TAG, "smiResultCB not null");
-                WritableMap payload = Arguments.createMap();
-                payload.putString("sd_state", result.getSdState().name());
-                payload.putString("sd_reason", result.getSdReason().name());
-                payload.putString("carrier_name", result.getCarrierName());
-                payload.putString("client_ip", result.getClientIp());
-                payload.putString("url", result.getUrl());
-                smiResultCB.invoke(payload);
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Exception: ", e);
-        }
-    }
-
-    @ReactMethod
-    public void getAnalytics(Callback smiAnalyticsCB)
-    {
-        if(mContext==null){
-            Log.i(TAG, "Null app context");
-            return;
-        }
-        Analytics smiAnalytics = SmiSdk.getAnalytics();
-        if(smiAnalyticsCB!=null){
-            WritableMap payload = Arguments.createMap();
-            payload.putDouble("cellular_session_time", smiAnalytics.getCellularSessionTime());
-            payload.putDouble("sd_data_usage", smiAnalytics.getSdDataUsage());
-            payload.putDouble("wifi_session_time", smiAnalytics.getWifiSessionTime());
-            smiAnalyticsCB.invoke(payload);
-        }
-    }
-
-    @ReactMethod
-    public void updateUserId(String id)
-    {
-        SmiSdk.updateUserId(id);
-    }
-
-    @ReactMethod
-    public void updateUserTag(ReadableArray userTags)
-    {
-        List<String> userTagsJava = null;
-        if( (userTags!=null) && (userTags.size()>0))
-        {
-            userTagsJava = new ArrayList<String>();
-            Log.d(TAG, "userTags length: "+userTags.size());
-            for(int i=0; i<userTags.size(); i++)
-            {
-                userTagsJava.add(userTags.getString(i));
-            }
-            SmiSdk.updateUserTag(userTagsJava);
-        }
-        else
-        {
-            Log.d(TAG, "userTags not available.");
-        }
-    }
-
     public static void setSmiResultToModule(SmiResult result){
         Log.d(TAG, "setSmiResultToModule.");
         sSmiResult = result;
