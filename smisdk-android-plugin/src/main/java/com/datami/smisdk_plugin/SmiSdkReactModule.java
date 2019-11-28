@@ -67,7 +67,10 @@ public class SmiSdkReactModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void initSponsoredData(String sdkKey, int iconId, MessagingType messagingType, boolean startVpn){
         Log.d(TAG, "initSponsoredData()");
-        
+        if(mContext){
+            Log.e(TAG, "App context is null!");
+            return;
+        }
         SmiVpnSdk.initSponsoredData(sdkKey, mContext, iconId, messagingType, startVpn);
     }
 
