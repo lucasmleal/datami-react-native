@@ -59,9 +59,15 @@ RCT_EXPORT_MODULE()
     if([notif.name isEqualToString:SDSTATE_CHANGE_NOTIF])
     {   
         sr =  notif.object;
-        NSLog(@"receivedStateChage, sdState: %ld", (long)sr.sdState);
+        NSLog(@"receivedStateChage, sdState: %ld sr.clientIp:%@ sr.carrierName:%@ sdReason: %ld ", (long)sr.sdState, sr.clientIp, sr.carrierName, sr.sdReason);
         if(hasListeners) {
-            [self sendEventWithName:@"DATAMI_EVENT" body:@{@"state": [NSNumber numberWithInteger:sr.sdState]}];
+          if(sr.clientIp != nil){
+            [self sendEventWithName:@"DATAMI_EVENT" body:@{@"state": [NSNumber numberWithInteger:sr.sdState],@"sdReason": [NSNumber numberWithInt:sr.sdReason],
+         @"clientIp": sr.clientIp, @"carrierName": sr.carrierName}];
+          }else{
+            [self sendEventWithName:@"DATAMI_EVENT" body:@{@"state": [NSNumber numberWithInteger:sr.sdState],@"sdReason": [NSNumber numberWithInt:sr.sdReason],
+         @"carrierName": sr.carrierName}];
+          }
         }
     }
     else
