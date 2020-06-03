@@ -1,0 +1,44 @@
+diff --git a/node_modules/react-native/Libraries/Network/RCTHTTPRequestHandler.mm b/node_modules/react-native/Libraries/Network/RCTHTTPRequestHandler.mm
+index 274f381..e3bb0fb 100644
+--- a/node_modules/react-native/Libraries/Network/RCTHTTPRequestHandler.mm
++++ b/node_modules/react-native/Libraries/Network/RCTHTTPRequestHandler.mm
+@@ -13,6 +13,7 @@
+ #import <ReactCommon/RCTTurboModule.h>
+ 
+ #import "RCTNetworkPlugins.h"
++#import <sd-react-native-smisdk-plugin/SmiSdk.h>
+ 
+ @interface RCTHTTPRequestHandler () <NSURLSessionDataDelegate, RCTTurboModule>
+ 
+@@ -76,6 +77,8 @@ - (NSURLSessionDataTask *)sendRequest:(NSURLRequest *)request
+     callbackQueue.maxConcurrentOperationCount = 1;
+     callbackQueue.underlyingQueue = [[_bridge networking] methodQueue];
+     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
++      [SmiSdk registerAppConfiguration:configuration];
++      
+     // Set allowsCellularAccess to NO ONLY if key ReactNetworkForceWifiOnly exists AND its value is YES
+     if (useWifiOnly) {
+       configuration.allowsCellularAccess = ![useWifiOnly boolValue];
+diff --git a/node_modules/react-native/React/Base/RCTMultipartDataTask.m b/node_modules/react-native/React/Base/RCTMultipartDataTask.m
+index bee7b7c..fd0d31e 100644
+--- a/node_modules/react-native/React/Base/RCTMultipartDataTask.m
++++ b/node_modules/react-native/React/Base/RCTMultipartDataTask.m
+@@ -6,6 +6,7 @@
+  */
+ 
+ #import "RCTMultipartDataTask.h"
++#import <sd-react-native-smisdk-plugin/SmiSdk.h>
+ 
+ @interface RCTMultipartDataTask () <NSURLSessionDataDelegate, NSURLSessionDataDelegate>
+ 
+@@ -35,7 +36,9 @@ - (instancetype)initWithURL:(NSURL *)url
+ 
+ - (void)startTask
+ {
+-  NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
++    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
++    [SmiSdk registerAppConfiguration:sessionConfig];
++  NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig
+                                                         delegate:self delegateQueue:nil];
+   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:_url];
+   [request addValue:@"multipart/mixed" forHTTPHeaderField:@"Accept"];
