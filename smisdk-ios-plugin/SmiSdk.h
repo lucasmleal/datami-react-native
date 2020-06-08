@@ -39,6 +39,9 @@ typedef NS_ENUM(NSInteger, SdReason) {
     SD_NOT_AVAILABLE_CONNECTION_LOST = 22,
     SD_NOT_AVAILABLE_DNS_ERROR = 23,
     SD_NOT_AVAILABLE_APP_TRANSPORT_SECURITY_ERROR =24,
+    SD_NOT_AVAILABLE_SD_STOP_API_CALL = 25,
+    SD_NOT_AVAILABLE_ZERO_BALANCE_CAMPAIGN = 26,
+    SD_AVAILABLE_ONLY_FOR_ZERO_BALANCE_USERS = 27,
     SD_NOT_AVAILABLE_REASON_UNKNOWN = 100
 };
 
@@ -103,7 +106,15 @@ typedef NS_ENUM(NSInteger, SdReason) {
 
 /* call this API to get username and password to use in VPN profile */
 +(SmiResult*)getVpnSDAuth:(NSString*)sdkKey;
+#ifdef VPN_API
+/* VPN APIs */
++(void) initSponsoredVPN:(NSString*)sdkKey showSDMessage:(Boolean)showSDMessage startVPN:(Boolean) startVPN;
++(void) initSponsoredVPN:(NSString*)sdkKey showSDMessage:(Boolean)showSDMessage;
++(void) startSponsorVpn;
++(void) stopSponsorVpn;
++(SdState) getVpnSdState;
 
+#endif
 @end
 
 
