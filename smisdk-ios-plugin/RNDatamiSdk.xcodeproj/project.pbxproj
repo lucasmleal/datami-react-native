@@ -12,7 +12,6 @@
 		813C9D32210E4DA300D7AF72 /* libsmisdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 813C9D31210E4DA300D7AF72 /* libsmisdk.a */; };
 		813C9D33210E4E9200D7AF72 /* SmiAnalytics.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 813C9D2F210E4DA300D7AF72 /* SmiAnalytics.h */; };
 		813C9D34210E4E9200D7AF72 /* SmiSdk.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 813C9D2E210E4DA200D7AF72 /* SmiSdk.h */; };
-		813C9D35210E4E9200D7AF72 /* SmiUIWebView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 813C9D30210E4DA300D7AF72 /* SmiUIWebView.h */; };
 		813C9D36210E4E9200D7AF72 /* RNDatamiEventManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 813C9CC9210E40DA00D7AF72 /* RNDatamiEventManager.h */; };
 		813C9D37210E4E9200D7AF72 /* AppDelegate+Datami.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 813C9C8E210BAAD000D7AF72 /* AppDelegate+Datami.h */; };
 		813C9D38210E4E9200D7AF72 /* RNDatamiSdk.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B3E7B5881CC2AC0600A0062D /* RNDatamiSdk.h */; };
@@ -28,7 +27,6 @@
 			files = (
 				813C9D33210E4E9200D7AF72 /* SmiAnalytics.h in CopyFiles */,
 				813C9D34210E4E9200D7AF72 /* SmiSdk.h in CopyFiles */,
-				813C9D35210E4E9200D7AF72 /* SmiUIWebView.h in CopyFiles */,
 				813C9D36210E4E9200D7AF72 /* RNDatamiEventManager.h in CopyFiles */,
 				813C9D37210E4E9200D7AF72 /* AppDelegate+Datami.h in CopyFiles */,
 				813C9D38210E4E9200D7AF72 /* RNDatamiSdk.h in CopyFiles */,
@@ -45,7 +43,6 @@
 		813C9CCA210E40DA00D7AF72 /* RNDatamiEventManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNDatamiEventManager.m; sourceTree = "<group>"; };
 		813C9D2E210E4DA200D7AF72 /* SmiSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmiSdk.h; sourceTree = "<group>"; };
 		813C9D2F210E4DA300D7AF72 /* SmiAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmiAnalytics.h; sourceTree = "<group>"; };
-		813C9D30210E4DA300D7AF72 /* SmiUIWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmiUIWebView.h; sourceTree = "<group>"; };
 		813C9D31210E4DA300D7AF72 /* libsmisdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsmisdk.a; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNDatamiSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNDatamiSdk.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNDatamiSdk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNDatamiSdk.m; sourceTree = "<group>"; };
@@ -77,7 +74,6 @@
 				813C9D31210E4DA300D7AF72 /* libsmisdk.a */,
 				813C9D2F210E4DA300D7AF72 /* SmiAnalytics.h */,
 				813C9D2E210E4DA200D7AF72 /* SmiSdk.h */,
-				813C9D30210E4DA300D7AF72 /* SmiUIWebView.h */,
 				813C9CC9210E40DA00D7AF72 /* RNDatamiEventManager.h */,
 				813C9CCA210E40DA00D7AF72 /* RNDatamiEventManager.m */,
 				813C9C8E210BAAD000D7AF72 /* AppDelegate+Datami.h */,
@@ -127,6 +123,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
